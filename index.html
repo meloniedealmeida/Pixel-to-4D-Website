@@ -66,9 +66,20 @@
     .flex-videos-grid-customgap { flex:1; min-width: 260px; }
     .video-col { width: 100%; box-sizing: border-box; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; display: flex; flex-direction: column; }
 
-    /* make the column labels wrap */
-    .video-label { width: 100%; display:flex; flex-wrap:wrap; justify-content:center; gap:6px; padding: 6px 0; box-sizing:border-box; }
-    .video-label span { flex: 0 1 120px; max-width: 192px; text-align:center; }
+    /* Keep headers exactly aligned to six 192px video slices */
+    .video-label {
+      width: 1152px;
+      display: grid;
+      grid-template-columns: repeat(6, 192px);
+      margin: 0;
+      padding: 6px 0;
+      box-sizing: border-box;
+    }
+    .video-label span {
+      width: 192px;
+      text-align: center;
+      white-space: nowrap;
+    }
 
     /* video tiles: on wide screens each video keeps horizontal layout, on small screens they stack */
     .video-col .flexbox-video { display: inline-block; width: 320px; height: 180px; object-fit: cover; margin-right:6px; }
@@ -102,13 +113,12 @@
         flex: 0 0 70px;
       }
       .flex-videos-grid-customgap { flex: 0 0 auto; }
-      .video-label span { flex: 1 1 45%; max-width: none; }
       .video-col .flexbox-video { width: 1152px; height: 192px; margin: 6px 0; display:block; }
     }
 
     /* Very small phones */
     @media (max-width: 420px) {
-      .video-label span { flex-basis: 50%; font-size: 0.9em; }
+      .video-label span { font-size: 0.9em; }
       .publication-title { font-size: 1.25rem; line-height: 1.2; }
     }
   </style>
@@ -212,13 +222,13 @@
 
     <div class="flex-videos-grid-customgap">
       <div class="video-col">
-        <div class="video-label" style="width:1152px; display:flex; margin:0 auto; padding:6px 0;">
-          <span style="width:192px; display:inline-block; text-align:center;">Ground-truth</span>
-          <span style="width:192px; display:inline-block; text-align:center;">MotionCtrl</span>
-          <span style="width:192px; display:inline-block; text-align:center;">CameraCtrl</span>
-          <span style="width:192px; display:inline-block; text-align:center;">CamI2V</span>
-          <span style="width:192px; display:inline-block; text-align:center;">RealCam-I2V</span>
-          <span style="width:192px; display:inline-block; text-align:center;">Ours</span>
+        <div class="video-label">
+          <span>Ground-truth</span>
+          <span>MotionCtrl</span>
+          <span>CameraCtrl</span>
+          <span>CamI2V</span>
+          <span>RealCam-I2V</span>
+          <span>Ours</span>
         </div>
 
         <!-- video tiles (single merged source used for all columns) -->
