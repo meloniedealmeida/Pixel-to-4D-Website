@@ -60,11 +60,11 @@
 
     /* videos grid: flexible and scroll-friendly on narrow screens */
     .flex-videos-grid-rowhead { display:flex; align-items:stretch; gap:16px; flex-wrap:wrap; }
-    .row-headings { width: 50px; }
-    .row-label { height: auto; padding: 8px 6px; }
+    .row-headings { width: 70px; display: flex; flex-direction: column; }
+    .row-label { height: 192px; padding: 0 6px; display: flex; align-items: center; font-weight: 600; }
 
     .flex-videos-grid-customgap { flex:1; min-width: 260px; }
-    .video-col { width: 100%; box-sizing: border-box; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+    .video-col { width: 100%; box-sizing: border-box; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; display: flex; flex-direction: column; }
 
     /* make the column labels wrap */
     .video-label { width: 100%; display:flex; flex-wrap:wrap; justify-content:center; gap:6px; padding: 6px 0; box-sizing:border-box; }
@@ -76,14 +76,34 @@
 
     /* Small screens */
     @media (max-width: 900px) {
-      .diagram-arrow { display: none; }
-      .flex-diagram { flex-direction: column; }
+      /* Keep pipeline on one line; allow horizontal scroll on mobile */
+      .flex-diagram {
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 4px 8px 8px;
+      }
+      .diagram-box { flex: 0 0 220px; min-width: 220px; }
+      .diagram-arrow { display: block; }
       .diagram-img-model, .diagram-video-4d { max-height: 280px; }
 
-      /* hide row headings to save space, keep dataset labels accessible via stacked layout */
-      .row-headings { display: none; }
+      /* Keep row headings aligned with each result row and scroll horizontally */
+      .flex-videos-grid-rowhead {
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 8px 8px;
+      }
+      .row-headings {
+        display: flex;
+        flex: 0 0 70px;
+      }
+      .flex-videos-grid-customgap { flex: 0 0 auto; }
       .video-label span { flex: 1 1 45%; max-width: none; }
-      .video-col .flexbox-video { width: 100%; height: auto; margin: 6px 0; display:block; }
+      .video-col .flexbox-video { width: 1152px; height: 192px; margin: 6px 0; display:block; }
     }
 
     /* Very small phones */
@@ -136,15 +156,11 @@
                   </div>
 
 
-                  
-                </a>
-              </span>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </section>
 
 
@@ -182,40 +198,6 @@
 
 <!-- Five Videos Grid Section with Play All Button, 3 Rows, Column and Row Headings, and Custom Gap -->
 <section class="flex-videos-section">
-  <style>
-    /* place dataset labels as a left column, spaced to match the video area */
-    .flex-videos-grid-rowhead { display:flex; align-items:stretch; gap:16px; }
-    .row-headings {
-      width:50px; /* made narrower */
-      display:flex;
-      flex-direction:column;
-      /* each label is a fixed row matching video tile height */
-      align-items:flex-start;
-      padding:8px 6px; /* reduced padding to fit narrower column */
-      box-sizing:border-box;
-    }
-    .row-label {
-      height:192px;
-      display:flex;
-      align-items:center;
-      font-weight:600;
-      text-align:left;
-      padding:0 0 0 6px;
-      box-sizing:border-box;
-    }
-
-    .flex-videos-grid-customgap { flex:1; }
-
-    /* caption common to all video tiles */
-    .video-caption {
-      width:1152px;
-      margin:8px auto 14px;
-      text-align:center;
-      font-size:0.95em;
-      color:#444;
-    }
-  </style>
-
   <div class="flex-videos-grid-rowhead">
     <div class="row-headings">
       <div class="row-label">KITTI</div>
